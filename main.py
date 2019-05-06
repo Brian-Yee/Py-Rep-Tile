@@ -104,9 +104,13 @@ def generate_base_coords():
 
                 v1 = edges[1][1] - edges[1][0]
                 theta = np.arctan2(v1[1], v1[0])
-                rotated_coords = rotate(scaled_coords[:, 0], scaled_coords, np.pi + theta)
+                rotated_coords = rotate(
+                    scaled_coords[:, 0], scaled_coords, np.pi + theta
+                )
 
-                trans_vec = (shared_point.reshape(-1, 2) - rotated_coords[:, 0]).reshape(2, -1)
+                trans_vec = (
+                    shared_point.reshape(-1, 2) - rotated_coords[:, 0]
+                ).reshape(2, -1)
                 translated_coords = trans_vec + rotated_coords
 
                 coords[1, :] *= sign
