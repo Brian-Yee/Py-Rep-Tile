@@ -100,7 +100,7 @@ class Triangle:
             float
                 Phase of shortest leg vector.
         """
-        return (self._P - self._Q).phase
+        return cmath.phase(self._P - self._Q)
 
     @property
     def perimeter(self):
@@ -124,7 +124,7 @@ class Triangle:
             float
                 Largest imaginary component of triangle.
         """
-        return max(x.real for x in (self._Q, self._P, self._R))
+        return max(x.imag for x in (self._Q, self._P, self._R))
 
     @property
     def max_real(self):
@@ -135,7 +135,7 @@ class Triangle:
             float
                 Largest real component of triangle.
         """
-        return max(x.imag for x in (self._Q, self._P, self._R))
+        return max(x.real for x in (self._Q, self._P, self._R))
 
     def _rect(self):
         """
