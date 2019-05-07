@@ -7,7 +7,8 @@ END="\033[0m"
 
 help:
 	@echo "help         Display this message."
-	@echo "run          Generate a pinwheel tiling fractal"
+	@echo "run          Generate a pinwheel tiling fractal."
+	@echo "profile      Profile Code."
 	@echo "test         Run testing suite."
 	@echo "clean        Standardize repository."
 	@echo "deps         Install dependencies."
@@ -15,17 +16,22 @@ help:
 # EXAMPLES ]----------------------------------------------------------------------------------------
 .PHONY: run
 run:
-	python main.py 3
+	time python main.py 6
 
 # CORE ]--------------------------------------------------------------------------------------------
 .PHONY: test clean deps
 
+profile:
+	python -m cProfile -s cumtime main.py 4 > profile_stats
+	head -100 profile_stats
+
 test:
 	black --check .
-	pylint *.py
+	pylint *.py src
 
 clean:
 	black .
+	-rm profile_stats
 
 deps:
 	pip install -r requirements.txt

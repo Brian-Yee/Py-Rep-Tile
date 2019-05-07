@@ -2,39 +2,47 @@
 """
 Functions for drawing images.
 """
+import matplotlib.cm
 import matplotlib.pyplot as plt
-from matplotlib import cm
 from matplotlib.backends.backend_agg import FigureCanvasAgg
+from matplotlib.patches import Polygon
+from matplotlib.collections import PatchCollection
 import numpy as np
 
-plt.rcParams["figure.figsize"] = (20, 20)
+plt.rcParams["figure.figsize"] = (30, 30)
 
 
-def draw_triangles(triangles, fpath="triangles.png"):
+def draw_triangles(triangles, fpath="triangles.png", cmap_resolution=1024):
     """
-    Renders a set of triangles.
+    Renders a set of triangles coloured by phase.
 
     Arguments:
         triangles: list(Triangle)
             List of triangles to render.
+        cmap_resolution: int
+            Resolution of color map.
     """
-    resolution = 1024
-    viridis = cm.get_cmap("viridis", resolution)
-    viridis(np.linspace(0, 1, resolution))
-    for triangle in triangles:
-        theta = np.arctan2(triangle.short_leg.real, triangle.short_leg.imag)
-        triangle = triangle.rect()
-        color = viridis(int(resolution * theta / (2 * np.pi)))
-        plt.fill(*list(zip(*triangle + triangle[:1])), color=color)
+    fig, ax = plt.subplots()
+    ax.set_xlim(0, max(x.max_real for x in triangles))
+    ax.set_ylim(0, max(x.max_imag for x in triangles))
+    ax.set_aspect("equal")
+    ax.axis("off")
 
-    plt.gca().set_aspect("equal")
-    plt.gca().axis("off")
-    canvas = FigureCanvasAgg(plt.gcf())
+    patch_collection = PatchCollection(
+        [Polygon(x.perimeter) for x in triangles],
+        cmap=matplotlib.cm.get_cmap("twilight", cmap_resolution),
+    )
+
+    phases = np.array([x.phase for x in triangles])
+    patch_collection.set_array(cmap_resolution * phases / (2 * np.pi))
+
+    ax.add_collection(patch_collection)
+
+    canvas = FigureCanvasAgg(fig)
     canvas.draw()
 
     stream, (width, height) = canvas.print_to_buffer()
     img = np.fromstring(stream, np.uint8).reshape((height, width, 4))
-
     plt.imsave(fpath, _trim_border(img))
 
 

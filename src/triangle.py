@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# pylint: disable=invalid-name
+"""
+Triangle class specifically written for applying pinwheel operations.
+"""
 import cmath
 import numpy as np
 
@@ -87,13 +91,55 @@ class Triangle:
             Triangle(origin=d, short_leg=a, long_leg=c),
         )
 
-    def rect(self, tol=8):
+    @property
+    def phase(self):
+        """
+        Phase of triangle, defined by the shortest leg.
+
+        Returns:
+            float
+                Phase of shortest leg vector.
+        """
+        return (self._P - self._Q).phase
+
+    @property
+    def perimeter(self):
+        """
+        Returns the perimeter of triangle {A, B, C} defined as (A, B, C, A)
+
+        Returns:
+            tuple(float, float)
+                Perimeter of triangle
+        """
+        points = self._rect()
+
+        return points + points[:1]
+
+    @property
+    def max_imag(self):
+        """
+        Largest imaginary component of triangle.
+
+        Returns:
+            float
+                Largest imaginary component of triangle.
+        """
+        return max(x.real for x in (self._Q, self._P, self._R))
+
+    @property
+    def max_real(self):
+        """
+        Largest real component of triangle.
+
+        Returns:
+            float
+                Largest real component of triangle.
+        """
+        return max(x.imag for x in (self._Q, self._P, self._R))
+
+    def _rect(self):
         """
         Return triangular points as real floats.
-
-        Arguments:
-            tol: int
-                Tolerance for rounding complex values.
 
         Returns:
             list(tuple(float, float))
