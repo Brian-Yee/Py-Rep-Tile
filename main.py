@@ -8,7 +8,7 @@ from src.triangle import Triangle
 from src.renderer import draw_triangles
 
 
-def main(depth):
+def main(depth, as_rectangle):
     """
     Draws pin wheel tile.
 
@@ -26,7 +26,7 @@ def main(depth):
             new_triangles += triangle.subdivide()
         triangles = new_triangles
 
-    draw_triangles(triangles, fpath="imgs/pinwheel.png")
+    draw_triangles(triangles, as_rectangle, fpath="imgs/pinwheel.png")
 
 
 def parse_arguments():
@@ -37,11 +37,16 @@ def parse_arguments():
         argparse.Namespace
             Argparse namespace containg CLI inputs.
     """
-    parser = argparse.ArgumentParser(
-        description=("Polygon Spiral art creater. Create spiral art!")
-    )
+    parser = argparse.ArgumentParser(description=("Pinwheel tiling program."))
 
     parser.add_argument("depth", type=int, help="Depth of copies to form fractal")
+    parser.add_argument(
+        "--rectangle",
+        dest="as_rectangle",
+        default="n",
+        type=str,
+        help="Print final image as rectangle y/[n]",
+    )
 
     return parser.parse_args()
 
@@ -61,4 +66,4 @@ if __name__ == "__main__":
     ARGS = parse_arguments()
     assert_argument_vals(ARGS)
 
-    main(ARGS.depth)
+    main(ARGS.depth, ARGS.as_rectangle == "y")

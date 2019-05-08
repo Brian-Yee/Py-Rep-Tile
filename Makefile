@@ -7,16 +7,20 @@ END="\033[0m"
 
 help:
 	@echo "help         Display this message."
-	@echo "run          Generate a pinwheel tiling fractal."
+	@echo "run          Generate a pinwheel tiling."
+	@echo "rect         Generate a pinwheel tiling as a rectangular mural."
 	@echo "profile      Profile Code."
 	@echo "test         Run testing suite."
 	@echo "clean        Standardize repository."
 	@echo "deps         Install dependencies."
 
 # EXAMPLES ]----------------------------------------------------------------------------------------
-.PHONY: run
+.PHONY: run rect
 run:
 	time python main.py 6
+
+rect:
+	time python main.py 6 --rectangle y
 
 # CORE ]--------------------------------------------------------------------------------------------
 .PHONY: test clean deps
