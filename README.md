@@ -1,6 +1,6 @@
-# Python RepTile
+# Py-Rep-Tile
 
-A simple python program that allows a user to construct 
+A simple python program that allows a user to construct various simple
 [rep-tile](https://en.wikipedia.org/wiki/Rep-tile)
 tilings. Current implementations include
 
