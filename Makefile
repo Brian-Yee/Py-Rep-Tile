@@ -7,27 +7,22 @@ END="\033[0m"
 
 help:
 	@echo "help         Display this message."
-	@echo "run          Generate a pinwheel tiling."
-	@echo "rect         Generate a pinwheel tiling as a rectangular mural."
-	@echo "profile      Profile Code."
+	@echo "pinwheel     Generate a pinwheel tiling."
+	@echo "sphinx       Generate a sphinx tiling."
 	@echo "test         Run testing suite."
 	@echo "clean        Standardize repository."
 	@echo "deps         Install dependencies."
 
 # EXAMPLES ]----------------------------------------------------------------------------------------
-.PHONY: run rect
-run:
-	time python main.py 6
+.PHONY: pinwheel sphinx
+pinwheel:
+	time python main.py pinwheel 4
 
-rect:
-	time python main.py 6 --rectangle y
+sphinx:
+	time python main.py sphinx 4
 
 # CORE ]--------------------------------------------------------------------------------------------
 .PHONY: test clean deps
-
-profile:
-	python -m cProfile -s cumtime main.py 4 > profile_stats
-	head -100 profile_stats
 
 test:
 	black --check .

@@ -12,9 +12,7 @@ import numpy as np
 plt.rcParams["figure.figsize"] = (30, 30)
 
 
-def draw_triangles(
-    triangles, as_rectangle, fpath="triangles.png", cmap_resolution=1024
-):
+def draw_rep_tiles(triangles, fpath="triangles.png", cmap_resolution=1024):
     """
     Renders a set of triangles coloured by phase.
 
@@ -23,8 +21,6 @@ def draw_triangles(
             List of triangles to render.
         cmap_resolution: int
             Resolution of color map.
-        rectangle: bool
-            Whether to print the final image as a rectangle or triangle.
     """
     fig, ax = plt.subplots()
     ax.set_xlim(0, max(x.max_real for x in triangles))
@@ -49,8 +45,6 @@ def draw_triangles(
     img = np.fromstring(stream, np.uint8).reshape((height, width, 4))
 
     img = _trim_border(img)
-    if as_rectangle:
-        img += img[::-1, ::-1]
 
     plt.imsave(fpath, img)
 

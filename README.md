@@ -1,10 +1,15 @@
-# PynWheel
+# Python RepTile
 
-![Banner Version of Pinwheel Tiling](imgs/pinwheel.png)
+![Banner Version of Pinwheel Tiling](imgs/pinwheel-banner.png)
 
-A simple Conway [pinwheel tiling](https://en.wikipedia.org/wiki/Pinwheel_tiling) generator written
-in Python. For additional prettiness the triangles are coloured in by the phase of each triangle's 
-short leg.
+A simple python program that allows a user to construct 
+[rep-tile](https://en.wikipedia.org/wiki/Rep-tile)
+tilings. Current implementations include
+
+- [pinwheel](https://en.wikipedia.org/wiki/Pinwheel_tiling)
+- [sphinx](https://en.wikipedia.org/wiki/Sphinx_tiling)
+
+For additional prettiness rep-tiles are coloured by orientiation.
 
 # Usage
 
@@ -13,9 +18,8 @@ Some examples are provided in a `Makefile`
 ```
 > make
 help         Display this message.
-run          Generate a pinwheel tiling.
-rect         Generate a pinwheel tiling as a rectangular mural.
-profile      Profile Code.
+pinwheel     Generate a pinwheel tiling.
+sphinx       Generate a sphinx tiling.
 test         Run testing suite.
 clean        Standardize repository.
 deps         Install dependencies.
@@ -25,15 +29,15 @@ Additional interfacing details are available through `main.py` via the `-h` flag
 
 ```
 > python main.py -h
-usage: main.py [-h] [--rectangle AS_RECTANGLE] depth
+usage: main.py [-h] rep_tile iterations
 
 Pinwheel tiling program.
 
 positional arguments:
-  depth                 Depth of copies to form fractal
+  rep_tile    Type of rep-tile to iteratively generate. Select from
+              ('pinwheel', 'sphinx')
+  iterations  Number of times to iteratively subdivide rep-tiles into.
 
 optional arguments:
-  -h, --help            show this help message and exit
-  --rectangle AS_RECTANGLE
-                        Print final image as rectangle y/[n]
+  -h, --help  show this help message and exitusage: main.py [-h] [--rectangle AS_RECTANGLE] depth
 ```
