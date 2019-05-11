@@ -1,7 +1,5 @@
 # Python RepTile
 
-![Banner Version of Pinwheel Tiling](imgs/pinwheel-banner.png)
-
 A simple python program that allows a user to construct 
 [rep-tile](https://en.wikipedia.org/wiki/Rep-tile)
 tilings. Current implementations include
@@ -10,6 +8,11 @@ tilings. Current implementations include
 - [sphinx](https://en.wikipedia.org/wiki/Sphinx_tiling)
 
 For additional prettiness rep-tiles are coloured by orientiation.
+
+# Example Results
+
+![Pinwheel Tiling](imgs/pinwheel.png)
+![Sphinx Tiling](imgs/pinwheel.png)
 
 # Usage
 

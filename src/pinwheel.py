@@ -56,8 +56,8 @@ class Pinwheel(RepTile):
         QP = self._P - self._Q
 
         QP_rad, QP_phi = cmath.polar(QP)
-        Qa = cmath.rect(QP_rad, QP_phi + self.sign * np.pi / 2)
-        Qc = cmath.rect(2 / np.sqrt(5) * QP_rad, QP_phi + self.sign * self.alpha)
+        Qa = cmath.rect(QP_rad, QP_phi + self._sign * np.pi / 2)
+        Qc = cmath.rect(2 / np.sqrt(5) * QP_rad, QP_phi + self._sign * self.alpha)
         Qb = Qc / 2
 
         self.a = self._Q + Qa

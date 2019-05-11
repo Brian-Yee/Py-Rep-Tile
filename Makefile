@@ -16,10 +16,10 @@ help:
 # EXAMPLES ]----------------------------------------------------------------------------------------
 .PHONY: pinwheel sphinx
 pinwheel:
-	time python main.py pinwheel 4
+	time python main.py pinwheel 6
 
 sphinx:
-	time python main.py sphinx 4
+	time python main.py sphinx 6
 
 # CORE ]--------------------------------------------------------------------------------------------
 .PHONY: test clean deps

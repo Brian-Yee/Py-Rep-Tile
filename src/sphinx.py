@@ -55,7 +55,7 @@ class Sphinx(RepTile):
         QP_rad, QP_phi = cmath.polar(QP)
         QR_rad, QR_phi = cmath.polar(QR)
 
-        Pa = cmath.rect(QP_rad / 2, QP_phi + 2 * self.sign * self.alpha)
+        Pa = cmath.rect(QP_rad / 2, QP_phi + 2 * self._sign * self.alpha)
 
         self._a = self._P + Pa
         self._b = self._R - Pa

@@ -29,7 +29,7 @@ class RepTile:
         self._thumb = thumb
 
         vecs = (self._thumb - origin, self._index - origin)
-        self.sign = np.sign(np.cross(*[np.array([x.real, x.imag]) for x in vecs]))
+        self._sign = np.sign(np.cross(*[np.array([x.real, x.imag]) for x in vecs]))
         self._perimeter = ()
 
     @property
@@ -61,7 +61,7 @@ class RepTile:
         return max(x.imag for x in self._perimeter)
 
     @property
-    def phase(self):
+    def color(self):
         """
         Phase of triangle, defined by the shortest leg.
 
@@ -69,7 +69,13 @@ class RepTile:
             float
                 Phase of shortest leg vector.
         """
-        return cmath.phase(self._thumb - self._origin)
+        phase = cmath.phase(self._thumb - self._origin)
+
+        color = phase / 2
+        if self._sign == -1:
+            color += np.pi
+
+        return color
 
     @property
     def perimeter(self):

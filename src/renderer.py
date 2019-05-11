@@ -33,7 +33,7 @@ def draw_rep_tiles(triangles, fpath="triangles.png", cmap_resolution=1024):
         cmap=matplotlib.cm.get_cmap("twilight", cmap_resolution),
     )
 
-    phases = np.array([x.phase for x in triangles])
+    phases = np.array([x.color for x in triangles])
     patch_collection.set_array(cmap_resolution * phases / (2 * np.pi))
 
     ax.add_collection(patch_collection)
