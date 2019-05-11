@@ -12,7 +12,7 @@ For additional prettiness rep-tiles are coloured by orientiation.
 # Example Results
 
 ![Pinwheel Tiling](imgs/pinwheel.png)
-![Sphinx Tiling](imgs/pinwheel.png)
+![Sphinx Tiling](imgs/sphinx.png)
 
 # Usage
 
